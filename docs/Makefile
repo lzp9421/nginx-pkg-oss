@@ -22,6 +22,7 @@ PACKAGES=	nginx							\
 		nginx-module-rtmp					\
 		nginx-module-set-misc					\
 		nginx-module-subs-filter				\
+		nginx-module-upstream-jdomain				\
 		nginx-module-xslt
 
 all:		changes changelogs

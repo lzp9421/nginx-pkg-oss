@@ -52,20 +52,16 @@ MODULES=
 -include Makefile.module-*
 
 BASE_CONFIGURE_ARGS=\
-	--prefix=/usr/local/nginx
-
+	--prefix=/usr/local/nginx \
 	--user=nginx \
 	--group=nginx \
-
 	--with-http_gzip_static_module \
 	--with-http_ssl_module \
-	--with-http_stub_status_module \
+	--with-http_stub_status_module
 
 ifeq ($(BASE_TARGET), plus)
 BASE_CONFIGURE_ARGS+=\
-
 	--with-http_v2_module \
-
 	--with-compat \
 	--with-file-aio \
 	--with-threads \
@@ -74,23 +70,18 @@ BASE_CONFIGURE_ARGS+=\
 	--with-http_dav_module \
 	--with-http_flv_module \
 	--with-http_gunzip_module \
-
 	--with-http_mp4_module \
 	--with-http_random_index_module \
 	--with-http_realip_module \
 	--with-http_secure_link_module \
 	--with-http_slice_module \
-
 	--with-http_sub_module \
-
 	--with-mail \
 	--with-mail_ssl_module \
-
 	--with-stream \
 	--with-stream_realip_module \
 	--with-stream_ssl_module \
 	--with-stream_ssl_preread_module
-
 	--build=nginx-plus-r$(PLUS_VERSION) \
 	--with-http_auth_jwt_module \
 	--with-http_f4f_module \

@@ -4,10 +4,8 @@ MODULE_SUMMARY_upstream_jdomain=	3rd-party upstream jdomain module
 
 include $(CONTRIB)/src/ngx_http_upstream_jdomain_module/version
 
-MODULE_VERSION_upstream_jdomain=	$(UPSTREAM_JDOMAIN_NGINX_MODULE_VERSION)
+MODULE_VERSION_upstream_jdomain=	$(TARGET_VERSION)
 MODULE_RELEASE_upstream_jdomain=	1
-
-MODULE_VERSION_PREFIX_upstream_jdomain=$(MODULE_TARGET_PREFIX)
 
 MODULE_SOURCES_upstream_jdomain=	ngx_http_upstream_jdomain_module-$(UPSTREAM_JDOMAIN_NGINX_MODULE_GITHASH).tar.xz
 

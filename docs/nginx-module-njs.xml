@@ -5,20 +5,122 @@
 <change_log title="nginx_module_njs">
 
 
-<changes apply="nginx-module-njs" ver="0.7.0" rev="1" basever="1.20.2"
-         date="2021-11-16" time="17:56:25 +0300"
-         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<changes apply="nginx-module-njs" ver="0.7.5" rev="1" basever="1.22.0"
+         date="2022-06-21" time="21:29:56 +0400"
+         packager="Nginx Packaging &lt;nginx-packaging@f5.com&gt;">
 <change>
 <para>
-base version updated to 1.20.2-1
+njs updated to 0.7.5
 </para>
 </change>
 
 </changes>
 
 
-<changes apply="nginx-module-njs" ver="0.7.0" rev="1" basever="1.20.1"
-         date="2021-10-19" time="18:52:16 +0300"
+<changes apply="nginx-module-njs" ver="0.7.4" rev="1" basever="1.22.0"
+         date="2022-05-24" time="20:17:37 +0400"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+njs updated to 0.7.4
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.3" rev="1" basever="1.22.0"
+         date="2022-05-24" time="19:24:55 +0400"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.22.0-1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.3" rev="1" basever="1.21.6"
+         date="2022-04-12" time="13:44:16 +0100"
+         packager="Ippolitov Igor &lt;iippolitov@nginx.com&gt;">
+<change>
+<para>
+njs updated to 0.7.3
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.2" rev="1" basever="1.21.6"
+         date="2022-01-25" time="18:13:46 +0300"
+         packager="Mikhail Isachenkov &lt;mikhail.isachenkov@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.21.6-1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.2" rev="1" basever="1.21.5"
+         date="2022-01-25" time="16:44:14 +0300"
+         packager="Mikhail Isachenkov &lt;mikhail.isachenkov@nginx.com&gt;">
+<change>
+<para>
+njs updated to 0.7.2
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.1" rev="1" basever="1.21.5"
+         date="2021-12-28" time="18:40:58 +0300"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.21.5-1
+</para>
+</change>
+
+<change>
+<para>
+built with PCRE2
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.1" rev="1" basever="1.21.4"
+         date="2021-12-28" time="17:31:41 +0300"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+njs updated to 0.7.1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.0" rev="1" basever="1.21.4"
+         date="2021-11-02" time="18:01:49 +0300"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.21.4-1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.7.0" rev="1" basever="1.21.3"
+         date="2021-10-19" time="17:44:05 +0300"
          packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
 <change>
 <para>
@@ -29,8 +131,32 @@ njs updated to 0.7.0
 </changes>
 
 
-<changes apply="nginx-module-njs" ver="0.6.2" rev="1" basever="1.20.1"
-         date="2021-09-01" time="12:45:27 +0300"
+<changes apply="nginx-module-njs" ver="0.6.2" rev="1" basever="1.21.3"
+         date="2021-09-07" time="18:38:16 +0300"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.21.3-1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.6.2" rev="1" basever="1.21.2"
+         date="2021-08-31" time="18:35:29 +0300"
+         packager="Andrei Belov &lt;defan@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.21.2-1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.6.2" rev="1" basever="1.21.1"
+         date="2021-08-31" time="18:08:48 +0300"
          packager="Andrei Belov &lt;defan@nginx.com&gt;">
 <change>
 <para>
@@ -41,8 +167,20 @@ njs updated to 0.6.2
 </changes>
 
 
-<changes apply="nginx-module-njs" ver="0.6.1" rev="1" basever="1.20.1"
-         date="2021-06-29" time="15:37:05 +0300"
+<changes apply="nginx-module-njs" ver="0.6.1" rev="1" basever="1.21.1"
+         date="2021-07-06" time="18:11:20 +0300"
+         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
+<change>
+<para>
+base version updated to 1.21.1-1
+</para>
+</change>
+
+</changes>
+
+
+<changes apply="nginx-module-njs" ver="0.6.1" rev="1" basever="1.21.0"
+         date="2021-06-29" time="15:36:33 +0300"
          packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
 <change>
 <para>
@@ -53,8 +191,8 @@ njs updated to 0.6.1
 </changes>
 
 
-<changes apply="nginx-module-njs" ver="0.6.0" rev="1" basever="1.20.1"
-         date="2021-06-15" time="16:50:34 +0300"
+<changes apply="nginx-module-njs" ver="0.6.0" rev="1" basever="1.21.0"
+         date="2021-06-15" time="16:48:57 +0300"
          packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
 <change>
 <para>
@@ -65,24 +203,12 @@ njs updated to 0.6.0
 </changes>
 
 
-<changes apply="nginx-module-njs" ver="0.5.3" rev="1" basever="1.20.1"
-         date="2021-05-25" time="16:27:15 +0300"
+<changes apply="nginx-module-njs" ver="0.5.3" rev="1" basever="1.21.0"
+         date="2021-05-25" time="16:01:22 +0300"
          packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
 <change>
 <para>
-base version updated to 1.20.1-1
-</para>
-</change>
-
-</changes>
-
-
-<changes apply="nginx-module-njs" ver="0.5.3" rev="1" basever="1.20.0"
-         date="2021-04-20" time="17:49:09 +0300"
-         packager="Konstantin Pavlov &lt;thresh@nginx.com&gt;">
-<change>
-<para>
-base version updated to 1.20.0-1
+base version updated to 1.21.0-1
 </para>
 </change>
 

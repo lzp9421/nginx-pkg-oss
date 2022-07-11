@@ -9,6 +9,7 @@
 # Obtains pkg-oss tool, creates packaging files and copies in module source.
 #
 # CHANGELOG
+# v0.18 [29-Apr-2021] Added -V option to specify module version
 # v0.17 [11-Nov-2020] Fixed bashisms and made /bin/sh default interpreter
 # v0.16 [09-Nov-2020] Added Alpine Linux packaging
 # v0.15 [03-Nov-2020] use latest version tag if -v is specified
@@ -57,6 +58,7 @@ if [ $# -eq 0 ]; then
 	echo " URL may be Github clone or download link, otherwise 'tarball' is assumed."
 	echo " Options:"
 	echo " -n | --nickname <word>         # Used for packaging, lower case alphanumeric only"
+	echo " -V | --module-version          # Module version (default is 1.0-1)"
 	echo " -s | --skip-depends            # Skip dependecies check/install"
 	echo " -y | --non-interactive         # Automatically install dependencies and overwrite files"
 	echo " -f | --force-dynamic           # Attempt to convert static configuration to dynamic module"
@@ -75,6 +77,8 @@ SAY_YES=""
 COPY_CMD="cp -i"
 DO_DYNAMIC_CONVERT=0
 MODULE_NAME=""
+MODULE_VERSION="1.0"
+MODULE_RELEASE="1"
 BUILD_PLATFORM=OSS
 while [ $# -gt 1 ]; do
 	case "$1" in
@@ -93,6 +97,13 @@ while [ $# -gt 1 ]; do
 			;;
 		"-n" | "--nickname" )
 			MODULE_NAME=$2
+			shift; shift
+			;;
+		"-V" | "--module-version" )
+			MODULE_VERSION="${2%-*}"
+			if [ "${2#*-}" != "$2" ]; then
+				MODULE_RELEASE="${2#*-}"
+			fi
 			shift; shift
 			;;
 		"-r")
@@ -152,7 +163,7 @@ if [ `whereis yum 2>/dev/null | grep -c "^yum: /"` -eq 1 ]; then
 	PKG_MGR_INSTALL="yum install $SAY_YES"
 	PKG_MGR_UPDATE="yum makecache"
 	PKG_FMT=rpm
-	NGINX_PACKAGES="pcre-devel zlib-devel openssl-devel"
+	NGINX_PACKAGES="pcre2-devel pcre-devel zlib-devel openssl-devel"
 	DEVEL_PACKAGES="rpm-build libxml2 libxslt"
 	PACKAGING_ROOT=pkg-oss/rpm/
 	PACKAGING_DIR=rpm/SPECS
@@ -162,7 +173,7 @@ elif [ `whereis apt-get 2>/dev/null | grep -c "^apt-get: /"` -eq 1 ]; then
 	PKG_MGR_INSTALL="apt-get --no-install-suggests --no-install-recommends install $SAY_YES"
 	PKG_MGR_UPDATE="apt-get update"
 	PKG_FMT=deb
-	NGINX_PACKAGES="libpcre3-dev zlib1g-dev libssl-dev"
+	NGINX_PACKAGES="libpcre2-dev libpcre3-dev zlib1g-dev libssl-dev"
 	DEVEL_PACKAGES="devscripts fakeroot debhelper dpkg-dev quilt lsb-release build-essential libxml2-utils xsltproc"
 	PACKAGING_ROOT=pkg-oss/debian/
 	PACKAGING_DIR=debian
@@ -172,7 +183,7 @@ elif [ `apk --version | grep -c "^apk-tools"` -eq 1 ]; then
 	PKG_MGR_INSTALL="apk add"
 	PKG_MGR_UPDATE="apk update"
 	PKG_FMT=apk
-	NGINX_PACKAGES="linux-headers openssl-dev pcre-dev zlib-dev"
+	NGINX_PACKAGES="linux-headers openssl-dev pcre2-dev pcre-dev zlib-dev"
 	DEVEL_PACKAGES="openssl abuild musl-dev"
 	PACKAGING_ROOT=pkg-oss/alpine/
 	PACKAGING_DIR=alpine
@@ -347,7 +358,17 @@ fi
 #
 echo "$ME: INFO: Downloading NGINX packaging tool"
 cd $BUILD_DIR
-hg clone https://hg.nginx.org/pkg-oss
+
+PKG_OSS_URL="https://hg.nginx.org/pkg-oss"
+
+if [ "$PKG_FMT" = "rpm" ]; then
+	if [ `rpm --eval "0%{?rhel}"` -lt 8 ] || [ `rpm --eval "0%{?amzn}"` -le 2 ]; then
+		PKG_OSS_URL="http://hg.nginx.org/pkg-oss"
+	fi
+fi
+
+hg clone $PKG_OSS_URL
+
 if [ "$BUILD_PLATFORM" = "OSS" ]; then
 	if [ "$OSS_VER" != "" ]; then
 		( cd pkg-oss && hg update `hg tags | grep "^$OSS_VER" | head -1 | awk '{print $1}'` )
@@ -390,7 +411,7 @@ cat << __EOF__ >pkg-oss/docs/nginx-module-$MODULE_NAME.xml
 <change_log title="nginx_module_$MODULE_NAME">
 
 
-<changes apply="nginx-module-$MODULE_NAME" ver="$VERSION" rev="1"
+<changes apply="nginx-module-$MODULE_NAME" ver="$MODULE_VERSION" rev="$MODULE_RELEASE" basever="$VERSION"
          date="`date '+%Y-%m-%d'`" time="`date '+%H:%M:%S %z'`"
          packager="Build Script &lt;build.script@example.com&gt;">
 
@@ -418,8 +439,9 @@ MODULE_PACKAGE_VENDOR=	Build Script <build.script@example.com>
 MODULE_PACKAGE_URL=	https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/
 
 MODULE_SUMMARY_$MODULE_NAME=		$MODULE_NAME dynamic module
-MODULE_VERSION_$MODULE_NAME=		$VERSION
-MODULE_RELEASE_$MODULE_NAME=		1
+MODULE_VERSION_$MODULE_NAME=		$MODULE_VERSION
+MODULE_RELEASE_$MODULE_NAME=		$MODULE_RELEASE
+MODULE_VERSION_PREFIX_$MODULE_NAME=	\$(MODULE_TARGET_PREFIX)
 MODULE_CONFARGS_$MODULE_NAME=		--add-dynamic-module=\$(MODSRC_PREFIX)$MODULE_NAME-$VERSION
 MODULE_SOURCES_$MODULE_NAME=		$MODULE_NAME-$VERSION.tar.gz
 

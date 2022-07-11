@@ -155,7 +155,7 @@ rules-base: $(BASE_SRC) nginx.deb-changelog
 	mkdir -p debuild-base/$(SRCDIR)/debian ; \
 	mkdir -p debuild-base/$(SRCDIR)/debian/source ; \
 	echo "3.0 (quilt)" > debuild-base/$(SRCDIR)/debian/source/format ; \
-	echo "9" > debuild-base/$(SRCDIR)/debian/compat ; \
+	echo "11" > debuild-base/$(SRCDIR)/debian/compat ; \
 	for patch in `find $(CONTRIB)/src/nginx$(BASE_SUFFIX)/ -type f -name '*.patch' -printf "%f\n" | sort`; do \
 		mkdir -p debuild-base/$(SRCDIR)/debian/patches ; \
 		echo $$patch >> debuild-base/$(SRCDIR)/debian/patches/series ; \
@@ -260,7 +260,7 @@ rules-module-%: $(BASE_SRC) nginx-module-%.deb-changelog .deps-module-%
 	mkdir -p $${builddir}/$(SRCDIR)/debian/extra ; \
 	mkdir -p $${builddir}/$(SRCDIR)/debian/source ; \
 	echo "3.0 (quilt)" > $${builddir}/$(SRCDIR)/debian/source/format ; \
-	echo "9" > $${builddir}/$(SRCDIR)/debian/compat ; \
+	echo "11" > $${builddir}/$(SRCDIR)/debian/compat ; \
 	for src in $(MODULE_SOURCES_$(call modname, $*)); do \
 		tar -C $${builddir}/$(SRCDIR)/debian/extra -xvf $(CONTRIB)/tarballs/$${src} ; \
 		sn=`echo $${src} | sed -e 's/-[0-9].*$$//'` ; \
@@ -428,7 +428,7 @@ test-module-%: base nginx-tests module-%
 
 clean:
 	@rm -rf base module-* rules-base rules-module-* debuild-base debuild-module-* nginx-tests $(BASE_SRC) .deps-module-*
-	@rm -f nginx.deb-changelog nginx-module-*.deb-changelog
+	@rm -f nginx.deb-changelog nginx-module-*.deb-changelog nginx-module-*.skip
 
 .PHONY:	default list list-base list-all-modules list-base-modules all modules rules test test-debug clean
 

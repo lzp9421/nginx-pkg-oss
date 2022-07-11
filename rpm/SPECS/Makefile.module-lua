@@ -47,6 +47,7 @@ MODULE_CONFARGS_lua=	--with-http_dav_module \
 	touch $@
 
 define MODULE_DEFINITIONS_lua
+BuildRequires: pcre-devel
 Requires: $(NDK_DEPENDENCY_TAG)
 %define LUAJIT_INC %{bdir}/luajit2-$(LUAJIT2_VERSION)/usr/include/nginx-luajit-2.1
 %define LUAJIT_LIB %{bdir}/luajit2-$(LUAJIT2_VERSION)/usr/lib
@@ -59,6 +60,9 @@ DESTDIR="%{bdir}/luajit2-$(LUAJIT2_VERSION)" CFLAGS="-fPIC" make %{?_smp_mflags}
 mv %{bdir}/luajit2-$(LUAJIT2_VERSION)/usr/bin/luajit %{bdir}/luajit2-$(LUAJIT2_VERSION)/usr/bin/nginx-luajit
 endef
 export MODULE_PREBUILD_lua
+
+MODULE_LD_OPT_lua=-lpcre
+MODULE_LD_OPT_DEBUG_lua=$(MODULE_LD_OPT_lua)
 
 define MODULE_ENV_lua
 LUAJIT_INC="%{LUAJIT_INC}" \\

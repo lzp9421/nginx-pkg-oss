@@ -38,6 +38,14 @@ BuildRequires: openssl-devel >= 1.1.1
 %define _debugsource_template %{nil}
 %endif
 
+%if 0%{?rhel} == 9
+%define epoch 1
+Epoch: %{epoch}
+Requires(pre): shadow-utils
+BuildRequires: openssl-devel
+%define _debugsource_template %{nil}
+%endif
+
 %if 0%{?suse_version} >= 1315
 %define _group Productivity/Networking/Web/Servers
 %define nginx_loggroup trusted
@@ -61,7 +69,7 @@ Requires(pre): shadow-utils
 
 %define bdir %{_builddir}/%{name}-%{base_version}
 
-%define WITH_CC_OPT $(echo %{optflags} $(pcre-config --cflags)) -fPIC
+%define WITH_CC_OPT $(echo %{optflags} $(pcre2-config --cflags)) -fPIC
 %define WITH_LD_OPT -Wl,-z,relro -Wl,-z,now -pie
 
 %define BASE_CONFIGURE_ARGS $(echo "%%BASE_CONFIGURE_ARGS%%")
@@ -91,7 +99,7 @@ License: 2-clause BSD-like license
 
 BuildRoot: %{_tmppath}/%{name}-%{base_version}-%{base_release}-root
 BuildRequires: zlib-devel
-BuildRequires: pcre-devel
+BuildRequires: pcre2-devel
 
 Provides: webserver
 Provides: nginx-r%{base_version}
